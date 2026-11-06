@@ -6,11 +6,13 @@ import gsap from "gsap";
 type TextRevealProps = {
   children: React.ReactNode;
   className?: string;
+  delay?: number;
 };
 
 export default function TextReveal({
   children,
   className = "",
+  delay = 0,
 }: TextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -24,12 +26,13 @@ export default function TextReveal({
         y: 120,
         opacity: 0,
         duration: 1.2,
+        delay,
         ease: "power4.out",
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [delay]);
 
   return (
     <div ref={containerRef} className={`overflow-hidden ${className}`}>

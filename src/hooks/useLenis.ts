@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,9 +15,6 @@ export default function UseLenis() {
       lerp: 0.08,
       wheelMultiplier: 0.9,
     });
-
-    // Make Lenis available globally
-    (window as Window & { lenis?: Lenis }).lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -31,8 +28,6 @@ export default function UseLenis() {
     return () => {
       gsap.ticker.remove(update);
       lenis.destroy();
-
-      delete (window as Window & { lenis?: Lenis }).lenis;
     };
   }, []);
 
